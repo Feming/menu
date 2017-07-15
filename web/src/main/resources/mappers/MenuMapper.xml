@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.menu.dao.MenuMapper">
+    <!-- 开启基于redis的二级缓存 -->
+    <cache type="com.menu.util.RedisCache" />
+
+    <select id="get" resultType="com.menu.domain.Menu">
+        SELECT * FROM menu WHERE uuid = #{id}
+    </select>
+
+    <select id="findAll" resultType="com.menu.domain.Menu">
+        SELECT * FROM menu WHERE
+    </select>
+
+    <sql id="page_where">
+      <trim prefix="where" prefixOverrides="and | or">
+          <if test="uuid != null and uuid != ''">and uuid = #{uuid}</if>
+      </trim>
+    </sql>
+</mapper>
